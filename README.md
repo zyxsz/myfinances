@@ -31,3 +31,25 @@ Um aplicativo de gerenciamento de finanças, tenha o total controle sobre seus g
 
 - [ ] Gerenciamento de investimentos.
 - [ ] Projeções
+
+## Tecnologias.
+
+Algumas das possíveis tecnologias a serem usadas no projeto:
+
+- Back-end
+
+  - NestJS
+  - Postgres
+  - Jest (TDD)
+
+- Front-end
+
+  - ReactJS
+  - NextJs (?)
+  - Tailwind (?)
+  - Redux/zustand
+
+- Infra
+  - Pulumi IAC
+
+OBS: Acredito que a utilização de SSR no front-end não seja necessária para essa aplicação, sendo assim é provável a utilização de alguma outra tecnologia como o React Router V7.
