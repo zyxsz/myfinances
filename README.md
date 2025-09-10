@@ -4,7 +4,7 @@ Um aplicativo de gerenciamento de finanças, tenha o total controle sobre seus g
 
 ## Features
 
-- [ ] Gerenciamento do usuário.
+- [ ] Gerenciamento do usuário
 
   - Possibilidade de criar diferentes contas sobre um mesmo usuário (ex: PF, PJ)
 
