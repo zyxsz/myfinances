@@ -1,5 +1,6 @@
 import { Entity } from '@/shared/domain/entities/entity';
 import { InMemoryRepository } from '../../in-memory.repository';
+import { NotFoundError } from '@/shared/domain/errors/not-found.error';
 
 interface StubEntityProps {
   field1: string;
@@ -64,5 +65,13 @@ describe('In-memory repository unit tests', () => {
     expect(result).toBeDefined();
     expect(result.id).toEqual(entity.id);
     expect(result.field1).toEqual(entity.field1);
+  });
+
+  it('should throw while trying to find invalid entity by id', async () => {
+    const entity = new SubEntity({ field1: 'entity1' });
+
+    await sut.insert(entity);
+
+    expect(async () => await sut.findById('id')).rejects.toThrow(NotFoundError);
   });
 });
