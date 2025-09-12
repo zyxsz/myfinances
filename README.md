@@ -53,3 +53,29 @@ Algumas das possíveis tecnologias a serem usadas no projeto:
   - Pulumi IAC
 
 OBS: Acredito que a utilização de SSR no front-end não seja necessária para essa aplicação, sendo assim é provável a utilização de alguma outra tecnologia como o React Router V7.
+
+## Idealização
+
+Acompanhe abaixo todo o caminho de idealização e de criação das regras de negocio:
+
+#### Regras de negocio
+
+- Deverá ser possível a criação de novos usuários com os seguintes campos: **(email, nickname, firstName, lastName, password)** sendo eles apenas **(email, firstName, fullName e password)** necessários.
+
+- Um usuário poderá criar inúmeras contas.
+
+- Para a criação de uma conta deverá ser necessário os campos: **(name, type)**
+
+- Uma conta pode conter inúmeros **Rendimentos** e **Gastos**.
+
+- Para a criação de um **Rendimento** ou de um **Gasto** será utilizado os campos: **(name\*, description, valueInCents\*, releasedAt\*, currency\*)**
+
+- Uma conta pode conter diferentes **Grupamentos**.
+
+- Para a criação de um **Grupamento** será utilizado os campos: **(name\*, description, colorInHex)**
+
+- Deverá ser possível associar diferentes **Rendimentos** e **Gastos** a um **Grupamento** especifico.
+
+- O usuário deverá ter a liberdade de criar/adicionar/editar/excluir qualquer **Rendimentos**, **Gastos** e **Grupamentos** relacionados a uma conta especifica.
+
+> \* Representa campos obrigatórios.
