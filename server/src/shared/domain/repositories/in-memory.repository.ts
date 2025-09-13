@@ -20,9 +20,11 @@ export class InMemoryRepository<E extends Entity<P>, P> extends Repository<
   async insert(entity: E): Promise<void> {
     this.items.push(entity);
   }
+
   async update(entity: E): Promise<void> {
     this.items = this.items.map((e) => (e.id === entity.id ? entity : e));
   }
+
   async delete(entity: E): Promise<void> {
     this.items = this.items.filter((e) => e.id !== entity.id);
   }
