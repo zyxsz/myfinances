@@ -1,6 +1,6 @@
 import { User } from '@/users/domain/entities/user.entity';
 import { UsersInMemoryRepository } from '../../users.in-memory.repository';
-import type { UsersRepository } from '../../users.repository';
+import type { UsersRepository } from '../../../../../domain/repositories/users.repository';
 
 describe('Users in-memory repository unit tests', () => {
   let sut: UsersRepository;

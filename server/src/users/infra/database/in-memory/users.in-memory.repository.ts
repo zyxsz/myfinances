@@ -1,7 +1,8 @@
 import { InMemoryRepository } from '@/shared/domain/repositories/in-memory.repository';
-import type { UsersRepository } from './users.repository';
-import type { User } from '../entities/user.entity';
+
 import { NotFoundError } from '@/shared/domain/errors/not-found.error';
+import type { User } from '@/users/domain/entities/user.entity';
+import type { UsersRepository } from '@/users/domain/repositories/users.repository';
 
 export class UsersInMemoryRepository
   extends InMemoryRepository<User.Entity, User.Props>
