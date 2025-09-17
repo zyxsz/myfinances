@@ -3,6 +3,7 @@ import type { HashProvider } from '@/shared/app/providers/hash.provider';
 import { BaseUseCase } from '@/shared/app/use-cases/base.use-case';
 import { User } from '@/users/domain/entities/user.entity';
 import type { UsersRepository } from '@/users/domain/repositories/users.repository';
+import type { UserOutput } from '../dtos/user-output.dto';
 
 export namespace CreateUser {
   export interface Input {
@@ -13,15 +14,7 @@ export namespace CreateUser {
     password: string;
   }
 
-  export interface Output {
-    id: string;
-    email: string;
-    nickname: string | null;
-    firstName: string;
-    lastName: string;
-    updatedAt: Date;
-    createdAt: Date;
-  }
+  export interface Output extends UserOutput {}
 
   export class UseCase extends BaseUseCase<Input, Output> {
     constructor(

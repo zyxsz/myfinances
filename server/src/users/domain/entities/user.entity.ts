@@ -21,10 +21,12 @@ export namespace User {
     private validator: UserValidator;
 
     constructor(props: Props, id?: string) {
+      const validator = UserValidatorFactory.create();
+      validator.validate(props);
+
       super(props, id);
 
-      this.validator = UserValidatorFactory.create();
-      this.validate(props);
+      this.validator = validator;
     }
 
     public get nickname() {
