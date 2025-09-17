@@ -2,7 +2,7 @@
 
 Um aplicativo de gerenciamento de finanças, tenha o total controle sobre seus gastos, rendimentos e projeções!
 
-## 🎯 Tecnologias.
+## 🎯 Tecnologias
 
 Algumas das possíveis tecnologias a serem usadas no projeto:
 
@@ -15,7 +15,7 @@ Algumas das possíveis tecnologias a serem usadas no projeto:
 - Front-end
 
   - ReactJS
-  - NextJs (?)
+  - React Router V7
   - Tailwind (?)
   - Redux/zustand
 
@@ -26,17 +26,49 @@ Algumas das possíveis tecnologias a serem usadas no projeto:
 
 ## 📃 Idealização
 
-Acompanhe abaixo todo o caminho de idealização e de criação das regras de negocio:
+Acompanhe abaixo todo o caminho de idealização e de criação das regras de negócio:
 
-#### Regras de negocio
+Objetivo: Um aplicativo para gerenciamento de finanças de maneira intuitiva e completa!
 
-- Deverá ser possível a criação de novos usuários com os seguintes campos: **(email, nickname, firstName, lastName, password)** sendo eles apenas **(email, firstName, fullName e password)** necessários.
+#### Regras de negócio:
 
-- Um usuário poderá criar inúmeras contas.
+- Usuários:
 
-- Para a criação de uma conta deverá ser necessário os campos: **(name, type)**
+  - Campos: **(email\*, nickname, firstName\*, lastName\*, password\*)**.
+  - Deverá ser possível o cadastro um usuário.
+  - Deverá ser possível a atualização dos dados de um usuário.
+  - Deverá ser possível a atualização do email de um usuário.
+  - Deverá ser possível a atualização da senha de um usuário.
+  - Deverá ser possível a buscar pelos dados de um usuário.
+  - Deverá ser possível excluir um usuário.
+  <!-- - Um usuário cadastrado deve poder criar inúmeras **Contas**. -->
 
-- Uma conta pode conter inúmeros **Rendimentos** e **Gastos**.
+- Contas:
+
+  - Campos: **(name\*, type\*)**.
+  - Deverá ser possível a criação de uma conta com um usuário logado.
+  - Deverá ser possível a busca dos dados de uma conta.
+  - Deverá ser possível a atualização dos dados de uma conta.
+  - Deverá ser possível excluir uma conta.
+
+- Movimentações:
+  - Campos: **(name\*, description, valueInCents\*, releasedAt\*, current\*, type\*)**
+    - Type: (Income, Outcome)
+  - Deverá ser possível a criação de novas movimentações associada a uma conta diretamente.
+  - Deverá ser possível buscar dados de uma movimentação.
+  - Deverá ser possível a busca por movimentações de uma conta.
+  - Deverá ser possível atualizar uma movimentação.
+  - Deverá ser possível excluir uma movimentação.
+- Grupamentos:
+  - Campos: **(name\*, description, colorInHex)**
+  - Deverá ser possível a criação de grupamentos associados a uma conta especifica.
+  - Deverá ser possível listar os grupamentos de uma conta.
+  - Deverá ser possível buscar dados de um grupamento especifico.
+  - Deverá ser possível atualizar um grupamento especifico.
+  - Deverá ser possível excluir um grupamento especifico.
+  - Deverá ser possível associar/desassociar uma **Movimentação** a um grupamento especifico.
+
+<!-- - Uma conta pode conter inúmeros **Rendimentos** e **Gastos**.
 
 - Para a criação de um **Rendimento** ou de um **Gasto** será utilizado os campos: **(name\*, description, valueInCents\*, releasedAt\*, currency\*)**
 
@@ -46,7 +78,7 @@ Acompanhe abaixo todo o caminho de idealização e de criação das regras de ne
 
 - Deverá ser possível associar diferentes **Rendimentos** e **Gastos** a um **Grupamento** especifico.
 
-- O usuário deverá ter a liberdade de criar/adicionar/editar/excluir qualquer **Rendimentos**, **Gastos** e **Grupamentos** relacionados a uma conta especifica.
+- O usuário deverá ter a liberdade de criar/adicionar/editar/excluir qualquer **Rendimentos**, **Gastos** e **Grupamentos** relacionados a uma conta especifica. -->
 
 > \* Representa campos obrigatórios.
 
