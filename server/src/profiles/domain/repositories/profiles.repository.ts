@@ -1,0 +1,7 @@
+import { Repository } from '@/shared/domain/repositories/repository';
+import type { Profile } from '../entities/profile.entity';
+
+export abstract class ProfilesRepository extends Repository<
+  Profile.Entity,
+  Profile.Props
+> {}
