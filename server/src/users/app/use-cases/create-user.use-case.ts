@@ -1,8 +1,8 @@
 import { ConflictError } from '@/shared/app/errors/conflict.error';
-import type { HashProvider } from '@/shared/app/providers/hash.provider';
+import { HashProvider } from '@/shared/app/providers/hash.provider';
 import { BaseUseCase } from '@/shared/app/use-cases/base.use-case';
 import { User } from '@/users/domain/entities/user.entity';
-import type { UsersRepository } from '@/users/domain/repositories/users.repository';
+import { UsersRepository } from '@/users/domain/repositories/users.repository';
 import type { UserOutput } from '../dtos/user-output.dto';
 
 export namespace CreateUser {
