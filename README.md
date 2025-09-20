@@ -39,7 +39,7 @@ Objetivo: Um aplicativo para gerenciamento de finanças de maneira intuitiva e c
   - [x] Deverá ser possível a atualização dos dados de um usuário.
   - [x] Deverá ser possível a atualização da senha de um usuário.
   - [x] Deverá ser possível a buscar pelos dados de um usuário.
-  - [ ] ~~Deverá ser possível verificar o email de um usuário.
+  - [ ] ~~Deverá ser possível verificar o email de um usuário~~.
   - [ ] ~~Deverá ser possível a atualização do email de um usuário~~.
   - [ ] ~~Deverá ser possível excluir um usuário~~.
   <!-- - Um usuário cadastrado deve poder criar inúmeras **Contas**. -->
@@ -49,8 +49,8 @@ Objetivo: Um aplicativo para gerenciamento de finanças de maneira intuitiva e c
   - Campos: **(name\*, type\*)**.
   - [x] Deverá ser possível a criação de um perfil com um usuário logado.
   - [x] Deverá ser possível a busca dos dados de um perfil.
-  - [ ] Deverá ser possível a atualização dos dados de um perfil.
-  - [ ] Deverá ser possível excluir um perfil.
+  - [x] Deverá ser possível a atualização dos dados de um perfil.
+  - [x] Deverá ser possível excluir um perfil.
 
 - Lançamentos:
   - Campos: **(name\*, description, valueInCents\*, releasedAt\*, current\*, type\*)**
