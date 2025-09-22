@@ -5,6 +5,7 @@ import path from 'node:path';
 
 const configSchema = z.object({
   secret: z.string(),
+  port: z.coerce.number(),
 });
 
 type ConfigSchemaType = z.infer<typeof configSchema>;
@@ -18,7 +19,7 @@ export class ConfigService {
 
     const nodeEnviroment = process.env.NODE_ENV;
     const enviroment = dotenv.config({
-      path: path.resolve(__dirname, '../../../..', `.env.${nodeEnviroment}`),
+      path: path.resolve(process.cwd(), `.env.${nodeEnviroment}`),
     });
 
     const validatedData = this.validator.validateSchema(
@@ -28,7 +29,7 @@ export class ConfigService {
     this.data = validatedData;
   }
 
-  getValue(key: keyof ConfigSchemaType): ConfigSchemaType[typeof key] {
+  getValue<K extends keyof ConfigSchemaType>(key: K): ConfigSchemaType[K] {
     return this.data[key];
   }
 
