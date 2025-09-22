@@ -7,6 +7,13 @@ export class SchemaValidator {
       return schema.parse(data);
     } catch (error) {
       if (error instanceof z.ZodError) {
+        console.log(
+          error.issues.map((issue) => ({
+            field: issue.path.join('.'),
+            message: issue.message,
+          })),
+        );
+
         throw new ValidationError(
           'Validation failed',
           error.issues.map((issue) => ({

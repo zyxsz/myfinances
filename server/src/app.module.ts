@@ -5,13 +5,7 @@ import { ZodSerializerInterceptor, ZodValidationPipe } from 'nestjs-zod';
 import { JwtModule } from '@nestjs/jwt';
 
 @Module({
-  imports: [
-    JwtModule.register({
-      global: true,
-      secret: 'secret',
-    }),
-    UsersModule,
-  ],
+  imports: [UsersModule],
   controllers: [],
   providers: [
     {
