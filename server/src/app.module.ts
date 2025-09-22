@@ -3,9 +3,10 @@ import { UsersModule } from './users/infra/users.module';
 import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { ZodSerializerInterceptor, ZodValidationPipe } from 'nestjs-zod';
 import { JwtModule } from '@nestjs/jwt';
+import { ConfigModule } from './shared/infra/config/config.module';
 
 @Module({
-  imports: [UsersModule],
+  imports: [ConfigModule, UsersModule],
   controllers: [],
   providers: [
     {
