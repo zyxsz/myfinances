@@ -3,6 +3,7 @@ import { CreateUser } from '../app/use-cases/create-user.use-case';
 import { SignupDto } from './dtos/signup.dto';
 import { SignInDto } from './dtos/signin.dto';
 import { AuthService } from '@/auth/infra/auth.service';
+import { SignIn } from '../app/use-cases/sign-in.use-case';
 
 @Controller('users')
 export class UsersController {
@@ -11,6 +12,9 @@ export class UsersController {
 
   @Inject()
   private createUserUseCase: CreateUser.UseCase;
+
+  @Inject()
+  private signInUseCase: SignIn.UseCase;
 
   @Post('/signup')
   @HttpCode(201)
@@ -24,5 +28,14 @@ export class UsersController {
 
   @Post('/signin')
   @HttpCode(200)
-  async signIn(@Body() body: SignInDto) {}
+  async signIn(@Body() body: SignInDto) {
+    const user = await this.signInUseCase.execute({
+      email: body.email,
+      password: body.password,
+    });
+
+    const token = await this.authService.generateToken(user.id);
+
+    return { accessToken: token };
+  }
 }
