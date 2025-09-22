@@ -7,6 +7,7 @@ import { BcryptJsHashProvider } from './providers/bcryptjs-hash.provider';
 import { UsersController } from './users.controller';
 import { AuthModule } from '@/auth/infra/auth.module';
 import { SignIn } from '../app/use-cases/sign-in.use-case';
+import { GetUser } from '../app/use-cases/get-user.use-case';
 
 @Module({
   imports: [AuthModule],
@@ -27,6 +28,13 @@ import { SignIn } from '../app/use-cases/sign-in.use-case';
         return new SignIn.UseCase(repository, hashProvider);
       },
       inject: [UsersRepository, HashProvider],
+    },
+    {
+      provide: GetUser.UseCase,
+      useFactory: (repository: UsersRepository) => {
+        return new GetUser.UseCase(repository);
+      },
+      inject: [UsersRepository],
     },
   ],
 })

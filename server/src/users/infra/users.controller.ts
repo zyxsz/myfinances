@@ -1,9 +1,12 @@
-import { Body, Controller, HttpCode, Inject, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Inject, Post } from '@nestjs/common';
 import { CreateUser } from '../app/use-cases/create-user.use-case';
 import { SignupDto } from './dtos/signup.dto';
 import { SignInDto } from './dtos/signin.dto';
 import { AuthService } from '@/auth/infra/auth.service';
 import { SignIn } from '../app/use-cases/sign-in.use-case';
+import { AuthenticatedRoute } from '@/auth/infra/decorators/authenticated-route.decorator';
+import { AuthenticatedUser } from '@/auth/infra/decorators/authenticated-user.decorator';
+import { GetUser } from '../app/use-cases/get-user.use-case';
 
 @Controller('users')
 export class UsersController {
@@ -15,6 +18,9 @@ export class UsersController {
 
   @Inject()
   private signInUseCase: SignIn.UseCase;
+
+  @Inject()
+  private getUserUseCase: GetUser.UseCase;
 
   @Post('/signup')
   @HttpCode(201)
@@ -37,5 +43,14 @@ export class UsersController {
     const token = await this.authService.generateToken(user.id);
 
     return { accessToken: token };
+  }
+
+  @Get('/me')
+  @HttpCode(200)
+  @AuthenticatedRoute()
+  async getAuthenticatedUser(@AuthenticatedUser() userId: string) {
+    const user = await this.getUserUseCase.execute({ id: userId });
+
+    return user;
   }
 }
