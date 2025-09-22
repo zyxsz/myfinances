@@ -5,8 +5,10 @@ import { CreateUser } from '../app/use-cases/create-user.use-case';
 import { HashProvider } from '@/shared/app/providers/hash.provider';
 import { BcryptJsHashProvider } from './providers/bcryptjs-hash.provider';
 import { UsersController } from './users.controller';
+import { AuthModule } from '@/auth/infra/auth.module';
 
 @Module({
+  imports: [AuthModule],
   controllers: [UsersController],
   providers: [
     { provide: UsersRepository, useClass: UsersInMemoryRepository },

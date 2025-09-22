@@ -1,13 +1,13 @@
 import { Body, Controller, HttpCode, Inject, Post } from '@nestjs/common';
 import { CreateUser } from '../app/use-cases/create-user.use-case';
 import { SignupDto } from './dtos/signup.dto';
-import { JwtService } from '@nestjs/jwt';
 import { SignInDto } from './dtos/signin.dto';
+import { AuthService } from '@/auth/infra/auth.service';
 
 @Controller('users')
 export class UsersController {
   @Inject()
-  private jwtService: JwtService;
+  private authService: AuthService;
 
   @Inject()
   private createUserUseCase: CreateUser.UseCase;
@@ -17,12 +17,7 @@ export class UsersController {
   async signUp(@Body() body: SignupDto) {
     const user = await this.createUserUseCase.execute(body);
 
-    const token = await this.jwtService.signAsync(
-      {
-        userId: user.id,
-      },
-      { expiresIn: '7d' },
-    );
+    const token = await this.authService.generateToken(user.id);
 
     return { accessToken: token };
   }
