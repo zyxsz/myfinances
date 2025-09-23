@@ -1,4 +1,12 @@
-import { Body, Controller, Get, HttpCode, Inject, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  Inject,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { CreateUser } from '../app/use-cases/create-user.use-case';
 import { SignupDto } from './dtos/signup.dto';
 import { SignInDto } from './dtos/signin.dto';
@@ -7,6 +15,8 @@ import { SignIn } from '../app/use-cases/sign-in.use-case';
 import { AuthenticatedRoute } from '@/auth/infra/decorators/authenticated-route.decorator';
 import { AuthenticatedUser } from '@/auth/infra/decorators/authenticated-user.decorator';
 import { GetUser } from '../app/use-cases/get-user.use-case';
+import { UpdateUserDto } from './dtos/update-user.dot';
+import { UpdateUser } from '../app/use-cases/update-user.use-case';
 
 @Controller('users')
 export class UsersController {
@@ -21,6 +31,9 @@ export class UsersController {
 
   @Inject()
   private getUserUseCase: GetUser.UseCase;
+
+  @Inject()
+  private updateUserUseCase: UpdateUser.UseCase;
 
   @Post('/signup')
   @HttpCode(201)
@@ -52,5 +65,15 @@ export class UsersController {
     const user = await this.getUserUseCase.execute({ id: userId });
 
     return user;
+  }
+
+  @Patch('/')
+  @HttpCode(200)
+  @AuthenticatedRoute()
+  async updateUser(
+    @Body() body: UpdateUserDto,
+    @AuthenticatedUser() userId: string,
+  ) {
+    await this.updateUserUseCase.execute({ id: userId, data: body });
   }
 }

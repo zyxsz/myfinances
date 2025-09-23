@@ -8,6 +8,7 @@ import { UsersController } from './users.controller';
 import { AuthModule } from '@/auth/infra/auth.module';
 import { SignIn } from '../app/use-cases/sign-in.use-case';
 import { GetUser } from '../app/use-cases/get-user.use-case';
+import { UpdateUser } from '../app/use-cases/update-user.use-case';
 
 @Module({
   imports: [AuthModule],
@@ -33,6 +34,13 @@ import { GetUser } from '../app/use-cases/get-user.use-case';
       provide: GetUser.UseCase,
       useFactory: (repository: UsersRepository) => {
         return new GetUser.UseCase(repository);
+      },
+      inject: [UsersRepository],
+    },
+    {
+      provide: UpdateUser.UseCase,
+      useFactory: (repository: UsersRepository) => {
+        return new UpdateUser.UseCase(repository);
       },
       inject: [UsersRepository],
     },
