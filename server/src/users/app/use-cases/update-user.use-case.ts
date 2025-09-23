@@ -6,9 +6,11 @@ export namespace UpdateUser {
   export interface Input {
     id: string;
 
-    nickname?: string | null;
-    firstName?: string;
-    lastName?: string;
+    data: {
+      nickname?: string | null;
+      firstName?: string;
+      lastName?: string;
+    };
   }
 
   export interface Output extends UserOutput {}
@@ -21,9 +23,9 @@ export namespace UpdateUser {
     async execute(input: Input): Promise<Output> {
       const user = await this.usersRepository.findById(input.id);
 
-      if (input.nickname) user.nickname = input.nickname;
-      if (input.firstName) user.firstName = input.firstName;
-      if (input.lastName) user.lastName = input.lastName;
+      if (input.data.nickname) user.nickname = input.data.nickname;
+      if (input.data.firstName) user.firstName = input.data.firstName;
+      if (input.data.lastName) user.lastName = input.data.lastName;
 
       await this.usersRepository.update(user);
 

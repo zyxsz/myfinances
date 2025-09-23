@@ -27,7 +27,9 @@ describe('Update user use-case unit tests', () => {
 
     const response = await sut.execute({
       id: entity.id,
-      nickname: newNickname,
+      data: {
+        nickname: newNickname,
+      },
     });
 
     expect(response).toBeDefined();
@@ -51,7 +53,9 @@ describe('Update user use-case unit tests', () => {
 
     const response = await sut.execute({
       id: entity.id,
-      firstName: newFirstName,
+      data: {
+        firstName: newFirstName,
+      },
     });
 
     expect(response).toBeDefined();
@@ -75,7 +79,9 @@ describe('Update user use-case unit tests', () => {
 
     const response = await sut.execute({
       id: entity.id,
-      lastName: newLastName,
+      data: {
+        lastName: newLastName,
+      },
     });
 
     expect(response).toBeDefined();
@@ -88,7 +94,9 @@ describe('Update user use-case unit tests', () => {
     expect(() =>
       sut.execute({
         id: 'nf',
-        nickname: 'Not found',
+        data: {
+          nickname: 'Not found',
+        },
       }),
     ).rejects.toThrow(NotFoundError);
   });
