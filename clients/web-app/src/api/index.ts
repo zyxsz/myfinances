@@ -54,7 +54,7 @@ export namespace Api {
 
       return response;
     } catch (error) {
-      console.error(error);
+      console.log(error);
 
       throw new Error("Unable to finish request");
     }

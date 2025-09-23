@@ -1,26 +1,42 @@
 @import "tailwindcss";
+@source "../**/*.{js,ts,jsx,tsx}";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --app-main: #168118;
+  --app-main-text: #3e9c35;
+  --app-main-foreground: #f2f2f2;
+
+  --app-primary: #181818;
+  --app-primary-foreground: #f2f2f2;
+  --app-primary-foreground-muted: #bfbfbf;
+
+  --app-secondary: #29292d;
+  --app-secondary-card: #313139;
+
+  --app-error: #fb2c36;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --color-app-main: var(--app-main);
+  --color-app-main-text: var(--app-main-text);
+  --color-app-main-foreground: var(--app-main-foreground);
+
+  --color-app-primary: var(--app-primary);
+  --color-app-primary-foreground: var(--app-primary-foreground);
+  --color-app-primary-foreground-muted: var(--app-primary-foreground-muted);
+
+  --color-border: rgba(255, 255, 255, 0.15);
+
+  --color-app-secondary: var(--app-secondary);
+  --color-app-secondary-card: var(--app-secondary-card);
+
+  --color-app-error: var(--app-error);
+
+  --font-sans: var(--font-poppins);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-app-primary);
+  color: var(--app-primary-foreground);
 }
