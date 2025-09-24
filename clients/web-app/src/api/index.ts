@@ -1,4 +1,3 @@
-import { cookies } from "next/headers";
 import { RequestError } from "./errors/request.error";
 
 export namespace Api {
@@ -7,15 +6,21 @@ export namespace Api {
   export type RequestMethod = "GET" | "POST" | "PATCH";
 
   export const getCookies = async () => {
+    const { cookies } = await import("next/headers");
     const allCookies = (await cookies()).toString();
 
     return allCookies;
   };
 
   export const getAccessToken = async () => {
-    const allCookies = await cookies();
+    if (typeof window === "undefined") {
+      const { cookies } = await import("next/headers");
+      const allCookies = await cookies();
 
-    return allCookies.get("accessToken");
+      return allCookies.get("accessToken")?.value;
+    } else {
+      return "";
+    }
   };
 
   export const request = async <B extends BodyInit | null | undefined>(
@@ -54,7 +59,7 @@ export namespace Api {
 
       return response;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
 
       throw new Error("Unable to finish request");
     }

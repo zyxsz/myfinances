@@ -1,9 +1,12 @@
 @import "tailwindcss";
+/* @plugin "daisyui" {
+  themes: false;
+} */
 @source "../**/*.{js,ts,jsx,tsx}";
 
 :root {
-  --app-main: #168118;
-  --app-main-text: #3e9c35;
+  --app-main: #ffd700;
+  --app-main-text: #ffd700;
   --app-main-foreground: #f2f2f2;
 
   --app-primary: #181818;
