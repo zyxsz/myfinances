@@ -3,33 +3,65 @@
 import type { User } from "@/api/interfaces/entities/user.entity";
 import { Logo } from "./logo";
 import Link from "next/link";
-import type { ComponentProps, ReactNode } from "react";
+import { useState, type ComponentProps, type ReactNode } from "react";
 import {
   CheckIcon,
   ChevronDownIcon,
-  CogIcon,
   LogOutIcon,
   UserCog2Icon,
 } from "lucide-react";
 import {
   Dropdown,
   DropdownButton,
-  DropdownItem,
   DropdownItems,
   DropdownSeparator,
   DropdownTrigger,
 } from "./dropdown";
 import { Button } from "./button";
-import { MenuSeparator } from "@headlessui/react";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 interface Props {
   user: User;
 }
 
+const getMaxWidth = () => {
+  const pathname = usePathname();
+
+  console.log(pathname);
+
+  switch (pathname) {
+    case "/account": {
+      return "64rem";
+    }
+    default: {
+      return "80rem ";
+    }
+  }
+};
+
 export const Navbar = ({ user }: Props) => {
+  const [defaultWidth] = useState(getMaxWidth());
+
+  const maxWidth = getMaxWidth();
+
+  useGSAP(() => {
+    gsap.to(".navbarContent", {
+      maxWidth,
+      ease: "power1",
+    });
+  }, [maxWidth]);
+
   return (
     <nav className="fixed top-0 left-0 right-0 h-18 bg-app-primary border-b border-border flex items-center justify-center">
-      <div className="px-8 w-full max-w-screen-2xl mx-auto flex items-center gap-8 justify-between">
+      <div
+        className={cn(
+          "navbarContent px-8 w-full mx-auto flex items-center gap-8 justify-between"
+        )}
+        style={{ maxWidth: defaultWidth }}
+      >
         <div className="flex items-center gap-4">
           <Link href="/dashboard">
             <Logo className="w-32" />
@@ -66,11 +98,13 @@ export const Navbar = ({ user }: Props) => {
               </div>
             </DropdownTrigger>
             <DropdownItems anchor={{ gap: 8, to: "bottom end" }}>
-              <DropdownButton>
+              {/* <DropdownButton>
                 Meu perfil <UserCog2Icon />
-              </DropdownButton>
-              <DropdownButton>
-                Configurações <CogIcon />
+              </DropdownButton> */}
+              <DropdownButton asChild>
+                <Link href="/account">
+                  Meus dados <UserCog2Icon />
+                </Link>
               </DropdownButton>
               <DropdownSeparator />
               <DropdownButton>

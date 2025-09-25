@@ -1,6 +1,7 @@
 "use client";
 
 import { Text } from "@/components/text";
+import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import {
@@ -16,16 +17,24 @@ interface Props extends ComponentProps<"input"> {
   name: string;
   id?: string | undefined;
   label?: ReactNode;
+  containerClassName?: string;
 }
 
-export const TextField = ({ id, name, label, className, ...rest }: Props) => {
+export const TextField = ({
+  id,
+  name,
+  label,
+  className,
+  containerClassName,
+  ...rest
+}: Props) => {
   const {
     register,
     formState: { errors },
   } = useFormContext();
 
   return (
-    <fieldset className="flex flex-col">
+    <fieldset className={cn("flex flex-col", containerClassName)}>
       {label && (
         <label
           htmlFor={id}
@@ -36,7 +45,10 @@ export const TextField = ({ id, name, label, className, ...rest }: Props) => {
       )}
       <input
         id={id}
-        className="text-sm text-app-primary-foreground p-4 bg-app-secondary-card outline-none border border-border rounded-md focus:border-white/25 hover:border-white/25 transition-all"
+        className={cn(
+          "text-sm text-app-primary-foreground p-4 bg-app-secondary-card outline-none border border-border rounded-md focus:border-white/25 hover:border-white/25 transition-all",
+          className
+        )}
         {...rest}
         {...register(name)}
       />

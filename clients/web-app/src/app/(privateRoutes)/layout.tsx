@@ -14,7 +14,7 @@ export default async function Layout({ children }: { children: ReactNode }) {
   return (
     <UserStoreProvider defaultState={{ user }}>
       <Navbar user={user} />
-      {children}
+      <div className="pt-18">{children}</div>
     </UserStoreProvider>
   );
 }
