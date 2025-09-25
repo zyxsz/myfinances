@@ -12,6 +12,7 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { Text } from "../text";
 
 export const loginSchema = z.object({
   email: z.email(),
@@ -47,26 +48,15 @@ export const LoginForm = () => {
 
   // Animations
   const containerRef = useRef<HTMLDivElement>(null);
-  const logoRef = useRef(null);
 
   useGSAP(async () => {
-    // gsap.set(".logo", { opacity: 0, x: -16 });
-
-    await Promise.all([
-      gsap.to(".headerItem", {
-        delay: 0.15,
-        opacity: 1,
-        x: 0,
-        ease: "power2",
-        stagger: 0.15,
-      }),
-      // gsap.to(".description", {
-      //   delay: 0.15,
-      //   opacity: 1,
-      //   x: 0,
-      //   ease: "power2",
-      // }),
-    ]);
+    await gsap.to(".headerItem", {
+      delay: 0.15,
+      opacity: 1,
+      x: 0,
+      ease: "power2",
+      stagger: 0.15,
+    });
     await gsap.to(".formCard", {
       height: "auto",
       ease: "power2",
@@ -84,30 +74,26 @@ export const LoginForm = () => {
         <div className="space-y-2">
           <Logo
             className="headerItem logo w-52 will"
-            ref={logoRef}
             style={{
               opacity: 0,
               transform: "translateX(-16px)",
-              // willChange: "transform, opacity",
             }}
           />
-          <h1
-            className="headerItem text-sm text-app-primary-foreground-muted description"
+          <Text
+            className="headerItem"
+            variant="paragraph"
+            color="muted"
             style={{
               opacity: 0,
               transform: "translateX(-16px)",
-              // willChange: "transform, opacity",
             }}
           >
             Entre com sua conta
-          </h1>
+          </Text>
         </div>
       </header>
 
-      <div
-        className="formCard h-0 overflow-hidden py-0"
-        style={{ willChange: "contents" }}
-      >
+      <div className="formCard h-0 overflow-hidden py-0">
         <FormProvider {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
@@ -148,7 +134,7 @@ export const LoginForm = () => {
           willChange: "transform, opacity",
         }}
       >
-        <p className="text-sm text-app-primary-foreground-muted">
+        <Text variant="paragraphSm" color="muted">
           Não possui uma conta?{" "}
           <Link
             href="/auth/register"
@@ -157,7 +143,7 @@ export const LoginForm = () => {
             Registre-se aqui
           </Link>
           .
-        </p>
+        </Text>
       </footer>
     </div>
   );

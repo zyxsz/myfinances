@@ -1,7 +1,15 @@
 "use client";
 
-import { motion, AnimatePresence } from "motion/react";
-import type { ComponentProps, ReactNode } from "react";
+import { Text } from "@/components/text";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type ComponentProps,
+  type ReactNode,
+} from "react";
 import { useFormContext } from "react-hook-form";
 
 interface Props extends ComponentProps<"input"> {
@@ -33,26 +41,59 @@ export const TextField = ({ id, name, label, className, ...rest }: Props) => {
         {...register(name)}
       />
 
-      <AnimatePresence key={`${name}-error-msg`}>
-        {errors?.[name] && (
-          <motion.p
-            variants={{
-              initial: { opacity: 0, height: 0, marginTop: 0 },
-              animate: {
-                opacity: 1,
-                height: "auto",
-                marginTop: "0.5rem",
-              },
-            }}
-            initial="initial"
-            animate="animate"
-            exit={"initial"}
-            className="text-xs text-app-error"
-          >
-            {errors[name]?.message?.toString()}
-          </motion.p>
-        )}
-      </AnimatePresence>
+      <ErrorMessage error={errors?.[name]?.message?.toString()} />
     </fieldset>
   );
 };
+
+const ErrorMessage = ({ error }: { error?: string }) => {
+  const [currentError, setCurrentError] = useState(error || null);
+  const errorRef = useRef<HTMLParagraphElement>(null);
+
+  useEffect(() => {
+    if (!error) return;
+    setCurrentError(error);
+  }, [error]);
+
+  useGSAP(async () => {
+    if (error) {
+      gsap.to(errorRef.current, {
+        delay: 0.1,
+        duration: 0.2,
+        opacity: 1,
+        height: "auto",
+        marginTop: "0.5rem",
+        ease: "power1",
+      });
+    } else {
+      gsap.to(errorRef.current, {
+        delay: 0.1,
+        duration: 0.2,
+        opacity: 0,
+        height: 0,
+        marginTop: "0",
+        ease: "power1",
+      });
+    }
+  }, [error]);
+
+  return (
+    <Text
+      variant="paragraphXs"
+      color="error"
+      ref={errorRef}
+      style={{ height: 0, opacity: 0 }}
+    >
+      {currentError || "Error"}
+    </Text>
+  );
+};
+
+// variants={{
+//   initial: { opacity: 0, height: 0, marginTop: 0 },
+//   animate: {
+//     opacity: 1,
+//     height: "auto",
+//     marginTop: "0.5rem",
+//   },
+// }}
