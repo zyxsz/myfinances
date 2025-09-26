@@ -9,4 +9,6 @@ export abstract class ProfilesRepository extends Repository<
     id: string,
     userId: string,
   ): Promise<Profile.Entity>;
+
+  abstract findManyByUserId(userId: string): Promise<Profile.Entity[]>;
 }

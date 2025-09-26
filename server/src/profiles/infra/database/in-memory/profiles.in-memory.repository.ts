@@ -14,4 +14,10 @@ export class ProfilesInMemoryRepository
 
     return profile;
   }
+
+  async findManyByUserId(userId: string): Promise<Profile.Entity[]> {
+    const profiles = this.items.filter((i) => i.userId === userId);
+
+    return profiles;
+  }
 }

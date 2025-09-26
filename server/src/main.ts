@@ -4,6 +4,7 @@ import { ConfigService } from './shared/infra/config/config.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors();
 
   const configService = app.get(ConfigService);
 
