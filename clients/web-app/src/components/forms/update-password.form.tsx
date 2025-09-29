@@ -39,14 +39,15 @@ export const UpdatePasswordForm = () => {
 
   useGSAP(async () => {
     await gsap.to(".updatePasswordFormCard", {
-      delay: 1.5,
+      delay: 0.7,
+      duration: 0.25,
       opacity: 1,
       y: 0,
-      ease: "power1",
-      stagger: 0.15,
+      ease: "sine.inOut",
     });
 
     await gsap.to(".updatePasswordFormItem", {
+      duration: 0.25,
       opacity: 1,
       x: 0,
       ease: "power2",
@@ -57,7 +58,7 @@ export const UpdatePasswordForm = () => {
   return (
     <section
       ref={containerRef}
-      className="updatePasswordFormCard space-y-4 p-6 rounded-lg bg-app-secondary border border-border"
+      className="updatePasswordFormCard space-y-4 p-6 rounded-lg bg-app-secondary border border-border will-change-transform"
       style={{
         opacity: 0,
         transform: "translateY(-16px)",

@@ -22,7 +22,7 @@ export const Dropdown = (props: ComponentProps<typeof Menu>) => {
 };
 
 export const DropdownTrigger = (props: ComponentProps<typeof MenuButton>) => {
-  return <MenuButton {...props} as={Fragment} />;
+  return <MenuButton {...props} as={"span"} />;
 };
 
 export const DropdownItems = (props: ComponentProps<typeof MenuItems>) => {

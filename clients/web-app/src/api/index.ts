@@ -19,7 +19,9 @@ export namespace Api {
 
       return allCookies.get("accessToken")?.value;
     } else {
-      return "";
+      const cookie = await import("js-cookie");
+
+      return cookie.default.get("accessToken")?.toString();
     }
   };
 
@@ -59,7 +61,7 @@ export namespace Api {
 
       return response;
     } catch (error) {
-      // console.log(error);
+      console.log(error);
 
       throw new Error("Unable to finish request");
     }

@@ -42,13 +42,14 @@ export const UpdateUserForm = () => {
   useGSAP(async () => {
     await gsap.to(".updateUserFormCard", {
       delay: 0.35,
+      duration: 0.25,
       opacity: 1,
       y: 0,
-      ease: "power1",
-      stagger: 0.15,
+      ease: "sine.inOut",
     });
 
     await gsap.to(".updateUserFormItem", {
+      duration: 0.25,
       opacity: 1,
       x: 0,
       ease: "power2",
@@ -59,7 +60,7 @@ export const UpdateUserForm = () => {
   return (
     <section
       ref={containerRef}
-      className="updateUserFormCard py-0 space-y-4"
+      className="updateUserFormCard py-0 space-y-4 will-change-transform"
       style={{
         opacity: 0,
         transform: "translateY(-16px)",

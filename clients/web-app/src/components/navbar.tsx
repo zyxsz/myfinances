@@ -22,9 +22,11 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { ProfilesSelector } from "./profiles-selector";
 
 interface Props {
   user: User;
+  profilesSelector?: ReactNode;
 }
 
 const getMaxWidth = () => {
@@ -42,15 +44,15 @@ const getMaxWidth = () => {
   }
 };
 
-export const Navbar = ({ user }: Props) => {
+export const Navbar = ({ profilesSelector }: Props) => {
   const [defaultWidth] = useState(getMaxWidth());
-
   const maxWidth = getMaxWidth();
 
   useGSAP(() => {
     gsap.to(".navbarContent", {
       maxWidth,
-      ease: "power1",
+      duration: 0.2,
+      ease: "power1.inOut",
     });
   }, [maxWidth]);
 
@@ -67,22 +69,7 @@ export const Navbar = ({ user }: Props) => {
             <Logo className="w-32" />
           </Link>
 
-          <ul>
-            <Dropdown>
-              <DropdownTrigger>
-                <Button>
-                  Perfil 01 <ChevronDownIcon />
-                </Button>
-              </DropdownTrigger>
-
-              <DropdownItems anchor={{ gap: 8, to: "bottom start" }}>
-                <DropdownButton>
-                  Perfil 01 <CheckIcon />{" "}
-                </DropdownButton>
-                <DropdownButton>Perfil 02 </DropdownButton>
-              </DropdownItems>
-            </Dropdown>
-          </ul>
+          <ul>{profilesSelector}</ul>
         </div>
 
         <div className="flex items-center gap-6">
