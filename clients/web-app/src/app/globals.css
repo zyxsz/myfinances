@@ -20,6 +20,7 @@
 }
 
 @theme inline {
+  --text-xxs: 0.625rem;
   --color-app-main: var(--app-main);
   --color-app-main-text: var(--app-main-text);
   --color-app-main-foreground: var(--app-main-foreground);
@@ -29,6 +30,7 @@
   --color-app-primary-foreground-muted: var(--app-primary-foreground-muted);
 
   --color-border: rgba(255, 255, 255, 0.15);
+  --color-border-hover: rgba(255, 255, 255, 0.25);
 
   --color-app-secondary: var(--app-secondary);
   --color-app-secondary-card: var(--app-secondary-card);

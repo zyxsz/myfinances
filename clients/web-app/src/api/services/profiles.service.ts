@@ -3,10 +3,17 @@ import type {
   CreateProfileInput,
   CreateProfileOutput,
   GetManyProfilesResponse,
+  GetProfileOutput,
   UpdateProfileInput,
 } from "../interfaces/http/profiles-service.interface";
 
 export namespace ProfilesService {
+  export const getProfile = async (id: string): Promise<GetProfileOutput> => {
+    return Api.request(`profiles/${id}`, "GET").then((response) =>
+      response.json()
+    );
+  };
+
   export const getManyProfiles = async (): Promise<GetManyProfilesResponse> => {
     return Api.request("profiles", "GET").then((response) => response.json());
   };

@@ -6,7 +6,7 @@ const textVariants = cva("", {
   variants: {
     variant: {
       header1: "text-4xl font-black",
-      header2: "text-2xl font-black",
+      header2: "text-3xl font-black",
       header3: "text-xl font-bold",
       header4: "text-lg font-bold",
       paragraph: "text-base font-normal",
@@ -15,7 +15,8 @@ const textVariants = cva("", {
     },
     color: {
       default: "text-app-primary-foreground",
-      muted: "text-app-primary-foreground-muted",
+      muted:
+        "text-app-primary-foreground-muted [&_strong]:text-app-primary-foreground",
       error: "text-app-error",
     },
   },

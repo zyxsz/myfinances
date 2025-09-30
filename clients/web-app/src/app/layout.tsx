@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { Poppins, Rubik } from "next/font/google";
+import { Poppins, Inter } from "next/font/google";
 import "./globals.css";
 
-const poppins = Poppins({
+const poppins = Inter({
   variable: "--font-poppins",
   subsets: ["latin"],
   style: ["italic", "normal"],

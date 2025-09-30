@@ -2,6 +2,12 @@
 
 Um aplicativo de gerenciamento de finanças, tenha o total controle sobre seus gastos, rendimentos e projeções!
 
+## Imagens
+
+![Login](https://i.imgur.com/XGy0z85.png)
+
+![Profile dashboard](https://i.imgur.com/y1j7RLi.png)
+
 ## 🎯 Tecnologias
 
 Algumas das possíveis tecnologias a serem usadas no projeto:

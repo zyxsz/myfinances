@@ -16,6 +16,7 @@
     "@radix-ui/react-slot": "^1.2.3",
     "class-variance-authority": "^0.7.1",
     "daisyui": "^5.1.14",
+    "date-fns": "^4.1.0",
     "gsap": "^3.13.0",
     "js-cookie": "^3.0.5",
     "lucide-react": "^0.544.0",

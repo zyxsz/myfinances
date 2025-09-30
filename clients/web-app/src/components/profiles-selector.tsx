@@ -16,6 +16,8 @@ interface Props {
 export const ProfilesSelector = async ({ currentProfileId }: Props) => {
   const profiles = await ProfilesService.getManyProfiles();
 
+  console.log(currentProfileId);
+
   if (profiles.length <= 0)
     return (
       <Button asChild>

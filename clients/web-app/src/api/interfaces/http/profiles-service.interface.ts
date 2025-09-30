@@ -1,5 +1,7 @@
 import type { Profile, ProfileType } from "../entities/profile.entity";
 
+export type GetProfileOutput = Profile;
+
 export type GetManyProfilesResponse = Profile[];
 
 export type CreateProfileInput = {
