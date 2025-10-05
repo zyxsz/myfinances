@@ -8,6 +8,8 @@ export const profileSchema = z.object({
   type: z.enum(['PJ', 'PF']),
 });
 
+export type ProfileSchema = z.infer<typeof profileSchema>;
+
 export class ProfileValidator extends SchemaValidator {
   validate(data: z.infer<typeof profileSchema>) {
     return super.validateSchema(data, profileSchema);

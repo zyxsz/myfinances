@@ -8,11 +8,13 @@ import { CreateProfile } from '../app/use-cases/create-profile.use-case';
 import { GetProfile } from '../app/use-cases/get-profile.use-case';
 import { UpdateProfile } from '../app/use-cases/update-profile.use-case';
 import { DeleteProfile } from '../app/use-cases/delete-profile.use-case';
+import { ProfilesMongoDBRepository } from './database/mongodb/profiles.mongodb.repository';
+import { MongooseModule } from '@/shared/infra/database/mongoose/mongoose.module';
 
 @Module({
-  imports: [AuthModule],
+  imports: [MongooseModule, AuthModule],
   providers: [
-    { provide: ProfilesRepository, useClass: ProfilesInMemoryRepository },
+    { provide: ProfilesRepository, useClass: ProfilesMongoDBRepository },
     {
       provide: GetManyProfiles.UseCase,
       useFactory: (repository: ProfilesRepository) => {

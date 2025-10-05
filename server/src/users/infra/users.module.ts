@@ -9,12 +9,14 @@ import { AuthModule } from '@/auth/infra/auth.module';
 import { SignIn } from '../app/use-cases/sign-in.use-case';
 import { GetUser } from '../app/use-cases/get-user.use-case';
 import { UpdateUser } from '../app/use-cases/update-user.use-case';
+import { UsersMongoDBRepository } from './database/mongodb/users.mongodb.repository';
+import { MongooseModule } from '@/shared/infra/database/mongoose/mongoose.module';
 
 @Module({
-  imports: [AuthModule],
+  imports: [MongooseModule, AuthModule],
   controllers: [UsersController],
   providers: [
-    { provide: UsersRepository, useClass: UsersInMemoryRepository },
+    { provide: UsersRepository, useClass: UsersMongoDBRepository },
     { provide: HashProvider, useClass: BcryptJsHashProvider },
     {
       provide: CreateUser.UseCase,

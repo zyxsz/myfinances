@@ -9,6 +9,8 @@ export const userSchema = z.object({
   password: z.string().min(6).max(128),
 });
 
+export type UserSchema = z.infer<typeof userSchema>;
+
 export class UserValidator extends SchemaValidator {
   validate(data: z.infer<typeof userSchema>) {
     return super.validateSchema(data, userSchema);

@@ -4,9 +4,10 @@ import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { ZodSerializerInterceptor, ZodValidationPipe } from 'nestjs-zod';
 import { ConfigModule } from './shared/infra/config/config.module';
 import { ProfilesModule } from './profiles/infra/profiles.module';
+import { MongooseModule } from './shared/infra/database/mongoose/mongoose.module';
 
 @Module({
-  imports: [ConfigModule, UsersModule, ProfilesModule],
+  imports: [ConfigModule, MongooseModule, UsersModule, ProfilesModule],
   controllers: [],
   providers: [
     {

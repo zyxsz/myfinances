@@ -6,6 +6,7 @@ import path from 'node:path';
 const configSchema = z.object({
   secret: z.string(),
   port: z.coerce.number(),
+  mongoDBUrl: z.string(),
 });
 
 type ConfigSchemaType = z.infer<typeof configSchema>;
