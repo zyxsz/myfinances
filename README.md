@@ -54,7 +54,7 @@ Objetivo: Um aplicativo para gerenciamento de finanças de maneira intuitiva e c
 
   - [ ] Deverá ser possível a criação de novos lançamentos diretamente associados a um perfil.
   - [ ] Deverá ser possível a busca de dados de um lançamento especifico.
-  - [ ] Deverá ser possível a busca por multiplos lançamentos associados a um perfil (movimentações).
+  - [ ] Deverá ser possível a busca por múltiplos lançamentos associados a um perfil (movimentações).
   - [ ] Deverá ser possível atualizar um lançamento especifico.
   - [ ] Deverá ser possível excluir um lançamento especifico.
 
@@ -78,21 +78,21 @@ Objetivo: Um aplicativo para gerenciamento de finanças de maneira intuitiva e c
 
 - [ ] **Geral**
 
-  - [ ] O sistema deve ser contruido seguindo boas práticas e métodologias como: **SOLID, DDD, Clean Arch e TDD**.
+  - [ ] O sistema deve ser construído seguindo boas práticas e metodologias como: **SOLID, DDD, Clean Arch e TDD**.
   - [ ] O sistema deve possuir CI/CD (Github actions).
   - [ ] O sistema deve possuir documentação (Swagger).
 
 - [ ] **Usuários**
-  - [x] A autenticação deverá occorer atráves de um token JWT.
+  - [x] A autenticação deverá ocorrer através de um token JWT.
   - [x] A senha do usuário deverá ser salva como um HASH.
-  - [ ] A verificação de emails deverá ocorrer atraves de um email de confirmação.
+  - [ ] A verificação de emails deverá ocorrer através de um email de confirmação.
 
 ## 💀 Estrutura
 
 ```mermaid
 erDiagram
     direction LR
-    User {
+    Users {
         string id PK
         string nickname
         string email
@@ -102,7 +102,7 @@ erDiagram
         date updatedAt
         date createdAt
     }
-    Profile {
+    Profiles {
         string id PK
         string userId FK
         string name
@@ -111,7 +111,22 @@ erDiagram
         date updatedAt
         date createdAt
     }
-    User ||--o{ Profile : "has many"
+    Users ||--o{ Profiles : "one to many"
+    Releases {
+        string id PK
+        string profileId FK
+
+        string name
+        string description
+        int valueInCents
+
+        enum type
+        date madeAt
+
+        date updatedAt
+        date createdAt
+    }
+    Profiles ||--o{ Releases : "one to many"
 ```
 
 ## 🎯 Tecnologias
