@@ -2,119 +2,149 @@
 
 Um aplicativo de gerenciamento de finanças, tenha o total controle sobre seus gastos, rendimentos e projeções!
 
-## Imagens
+Esse repositório contém:
 
-![Login](https://i.imgur.com/XGy0z85.png)
+1. [server](server) a api da aplicação.
+2. [clients/web-app](clients/web-app) o frontend da aplicação.
 
-![Profile dashboard](https://i.imgur.com/y1j7RLi.png)
+## Conteúdo
 
-## 🎯 Tecnologias
-
-Algumas das possíveis tecnologias a serem usadas no projeto:
-
-- Back-end
-
-  - NestJS
-  - Postgres
-  - Jest (TDD)
-
-- Front-end
-
-  - ReactJS
-  - React Router V7
-  - Tailwind (?)
-  - Redux/zustand
-
-- Infra
-  - Pulumi IAC
-
-<!-- OBS: Acredito que a utilização de SSR no front-end não seja necessária para essa aplicação, sendo assim é provável a utilização de alguma outra tecnologia como o React Router V7. -->
+- [Idealização](#-idealização)
+- [Estrutura](#-estrutura)
+- [Tecnologias](#-tecnologias)
+- [Imagens](#-imagens)
+- [Mantedores](#-mantedores)
+- [Licença](#-licença)
 
 ## 📃 Idealização
 
 Acompanhe abaixo todo o caminho de idealização e de criação das regras de negócio:
 
-Objetivo: Um aplicativo para gerenciamento de finanças de maneira intuitiva e completa!
+Objetivo: Um aplicativo para gerenciamento de finanças de maneira intuitiva e completa. Feito com foco em organização e agilidade.
 
 #### Regras de negócio:
 
-- Usuários:
+- [ ] **Finanças**: O usuário poderá criar lançamentos personalizados, sejam eles Renda, Gasto ou Investimento. Afim de manter o controle total de suas finanças.
+- [ ] **Organização**: O usuário poderá separar suas finanças em diferentes perfis e poderá organizar lançamentos em diferentes grupos.
+- [ ] **Agendamentos**: O usuário poderá criar agendamentos para lançamentos, sejam eles recorrentes ou não.
+- [ ] **Integrações**: O usuário poderá integrar sua conta com diferentes aplicativos, a fim de integrar automaticamente gastos/investimentos diretamente com um perfil.
+- [ ] **IA**: O usuário poderá gerar um planejamento de gastos baseado em renda, investimentos e outros gastos desejados utilizando inteligência artificial.
 
-  - Campos: **(email\*, nickname, firstName\*, lastName\*, password\*)**.
-  - [x] Deverá ser possível o cadastro um usuário.
-  - [x] Deverá ser possível a atualização dos dados de um usuário.
-  - [x] Deverá ser possível a atualização da senha de um usuário.
-  - [x] Deverá ser possível a buscar pelos dados de um usuário.
-  - [ ] ~~Deverá ser possível verificar o email de um usuário~~.
-  - [ ] ~~Deverá ser possível a atualização do email de um usuário~~.
-  - [ ] ~~Deverá ser possível excluir um usuário~~.
-  <!-- - Um usuário cadastrado deve poder criar inúmeras **Contas**. -->
+#### Requisitos funcionais:
 
-- Perfis:
+- [ ] **Usuários**
 
-  - Campos: **(name\*, type\*)**.
-  - [x] Deverá ser possível a criação de um perfil com um usuário logado.
-  - [x] Deverá ser possível a busca dos dados de um perfil.
-  - [x] Deverá ser possível a atualização dos dados de um perfil.
-  - [x] Deverá ser possível excluir um perfil.
+  - [x] Deverá ser possível o cadastro do usuário com todos os campos necessários.
+  - [x] Deverá ser possível o login do usuário com os campos email e senha.
+  - [x] Deverá ser possível a busca pelos dados de um usuário autenticado.
+  - [x] Deverá ser possível a atualização dos dados de um usuário autenticado.
+  - [x] Deverá ser possível a atualização de senha de um usuário autenticado.
+  - [ ] Deverá ser possível verificar o email de um usuário autenticado.
+  - [ ] Deverá ser possível a atualização do email de um usuário.
+  - [ ] Deverá ser possível excluir um usuário.
 
-- Lançamentos:
-  - Campos: **(name\*, description, valueInCents\*, releasedAt\*, current\*, type\*)**
-    - Type: (Income, Outcome)
-  - Deverá ser possível a criação de novos lançamentos associada a um perfil diretamente.
-  - Deverá ser possível buscar dados de um lançamento.
-  - Deverá ser possível a busca por movimentações de um perfil.
-  - Deverá ser possível atualizar um lançamento.
-  - Deverá ser possível excluir um lançamento.
-- Grupamentos:
-  - Campos: **(name\*, description, colorInHex)**
-  - Deverá ser possível a criação de grupamentos associados a um perfil especifica.
-  - Deverá ser possível listar os grupamentos de um perfil.
-  - Deverá ser possível buscar dados de um grupamento especifico.
-  - Deverá ser possível atualizar um grupamento especifico.
-  - Deverá ser possível excluir um grupamento especifico.
-  - Deverá ser possível associar/desassociar um **Lançamento** a um grupamento especifico.
+- [x] **Perfis**
 
-<!-- - Um perfil pode conter inúmeros **Rendimentos** e **Gastos**.
+  - [x] Deverá ser possível a criação de um perfil diretamente relacionado a um usuário autenticado.
+  - [x] Deverá ser possível a busca dos dados de um perfil especifico.
+  - [x] Deverá ser possível a atualização de um perfil especifico.
+  - [x] Deverá ser possível excluir um perfil especifico.
 
-- Para a criação de um **Rendimento** ou de um **Gasto** será utilizado os campos: **(name\*, description, valueInCents\*, releasedAt\*, currency\*)**
+- [ ] **Lançamentos**
 
-- Um perfil pode conter diferentes **Grupamentos**.
+  - [ ] Deverá ser possível a criação de novos lançamentos diretamente associados a um perfil.
+  - [ ] Deverá ser possível a busca de dados de um lançamento especifico.
+  - [ ] Deverá ser possível a busca por multiplos lançamentos associados a um perfil (movimentações).
+  - [ ] Deverá ser possível atualizar um lançamento especifico.
+  - [ ] Deverá ser possível excluir um lançamento especifico.
 
-- Para a criação de um **Grupamento** será utilizado os campos: **(name\*, description, colorInHex)**
+- [ ] **Grupamentos**
 
-- Deverá ser possível associar diferentes **Rendimentos** e **Gastos** a um **Grupamento** especifico.
+  - [ ] Deverá ser possível a criação de grupamentos diretamente associados a um perfil.
+  - [ ] Deverá ser possível listar todos os grupamentos relacionados a um perfil especifico.
+  - [ ] Deverá ser possível buscar dados de um grupamento especifico.
+  - [ ] Deverá ser possível atualizar um grupamento especifico.
+  - [ ] Deverá ser possível excluir um grupamento especifico.
+  - [ ] Deverá ser possível associar/desassociar um **Lançamento** a um grupamento especifico.
 
-- O usuário deverá ter a liberdade de criar/adicionar/editar/excluir qualquer **Rendimentos**, **Gastos** e **Grupamentos** relacionados a um perfil especifica. -->
+- [ ] **Agendamentos**
+  - [ ] Deverá ser possível a criação de um agendamento diretamente ligado a um perfil.
+  - [ ] Deverá ser possível listar todos os agendamentos relacionados a um perfil especifico.
+  - [ ] Deverá ser possível buscar dados de um agendamento especifico.
+  - [ ] Deverá ser possível atualizar um agendamento especifico.
+  - [ ] Deverá ser possível excluir um agendamento especifico.
 
-> \* Representa campos obrigatórios.
+#### Requisitos não funcionais:
 
-## 📌 Funcionalidades
+- [ ] **Geral**
 
-- [ ] Gerenciamento do usuário
+  - [ ] O sistema deve ser contruido seguindo boas práticas e métodologias como: **SOLID, DDD, Clean Arch e TDD**.
+  - [ ] O sistema deve possuir CI/CD (Github actions).
+  - [ ] O sistema deve possuir documentação (Swagger).
 
-<!-- - Possibilidade de criar diferentes contas sobre um mesmo usuário (ex: PF, PJ) -->
+- [ ] **Usuários**
+  - [x] A autenticação deverá occorer atráves de um token JWT.
+  - [x] A senha do usuário deverá ser salva como um HASH.
+  - [ ] A verificação de emails deverá ocorrer atraves de um email de confirmação.
 
-- [ ] Painel de controle
+## 💀 Estrutura
 
-<!-- - Gráficos, estimativas, outros dados e movimentações. -->
+```mermaid
+erDiagram
+    direction LR
+    User {
+        string id PK
+        string nickname
+        string email
+        string firstName
+        string lastName
+        string password
+        date updatedAt
+        date createdAt
+    }
+    Profile {
+        string id PK
+        string userId FK
+        string name
+        string document
+        enum type
+        date updatedAt
+        date createdAt
+    }
+    User ||--o{ Profile : "has many"
+```
 
-- [ ] Gerenciamento de gastos.
+## 🎯 Tecnologias
 
-<!-- - Criar, editar e excluir um gasto. -->
+Algumas das possíveis tecnologias a serem usadas no projeto:
 
-- [ ] Gerenciamento de rendimentos
+- [x] **Web App**
 
-<!-- - Criar, editar e excluir um rendimento. -->
+  - [x] [NextJS](https://nextjs.org) (SSR)
+  - [x] [TailwindCSS](https://tailwindcss.com) (Styles)
+  - [x] [Zustand](https://zustand.docs.pmnd.rs) (State management)
 
-- [ ] Sistema de objetivos.
+- [x] **API**
 
-<!-- - (Meta de um determinado valor até certo período) -->
+  - [x] [NestJS](https://nestjs.com)
+  - [x] [MongoDB](https://www.mongodb.com)
+  - [x] [Jest](https://jestjs.io/) (TDD)
 
-- [ ] Grupamentos
-<!-- - (Lazer, Mercado, Contas, etc...) -->
+- [ ] **Infraestrutura**
+  - [ ] [Pulumi](http://pulumi.com) (IAC)
+  - [ ] [AWS]()
 
-## 📂 Funcionalidades futuras
+## 📷 Imagens
 
-- [ ] Gerenciamento de investimentos.
-- [ ] Projeções
+Veja imagens de como o frontend da aplicação está até o momento.
+
+![Login](https://i.imgur.com/XGy0z85.png)
+![Profile dashboard](https://i.imgur.com/y1j7RLi.png)
+
+## 👻 Mantedores
+
+[@zyxsz](https://github.com/zyxsz)
+
+## 🔓 Licença
+
+> Em breve.
