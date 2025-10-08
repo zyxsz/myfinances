@@ -66,6 +66,32 @@ export namespace Release {
       this.props.name = v;
     }
 
+    public set description(v) {
+      this.validate({ ...this.props, description: v });
+
+      if (this.props.description !== v) this.props.updatedAt = new Date();
+      this.props.description = v;
+    }
+
+    public set valueInCents(v) {
+      this.validate({ ...this.props, valueInCents: v });
+
+      if (this.props.valueInCents !== v) this.props.updatedAt = new Date();
+      this.props.valueInCents = v;
+    }
+    public set type(v) {
+      this.validate({ ...this.props, type: v });
+
+      if (this.props.type !== v) this.props.updatedAt = new Date();
+      this.props.type = v;
+    }
+    public set madeAt(v) {
+      this.validate({ ...this.props, madeAt: v });
+
+      if (this.props.madeAt !== v) this.props.updatedAt = new Date();
+      this.props.madeAt = v;
+    }
+
     static create(
       props: Optional<Props, 'updatedAt' | 'createdAt'>,
       id?: string,
