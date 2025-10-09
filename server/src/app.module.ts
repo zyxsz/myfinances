@@ -5,9 +5,10 @@ import { ZodSerializerInterceptor, ZodValidationPipe } from 'nestjs-zod';
 import { ConfigModule } from './shared/infra/config/config.module';
 import { ProfilesModule } from './profiles/infra/profiles.module';
 import { MongooseModule } from './shared/infra/database/mongoose/mongoose.module';
+import { PrismaModule } from './shared/infra/database/prisma/prisma.module';
 
 @Module({
-  imports: [ConfigModule, MongooseModule, UsersModule, ProfilesModule],
+  imports: [ConfigModule, PrismaModule, MongooseModule, UsersModule, ProfilesModule],
   controllers: [],
   providers: [
     {
@@ -20,4 +21,4 @@ import { MongooseModule } from './shared/infra/database/mongoose/mongoose.module
     },
   ],
 })
-export class AppModule {}
+export class AppModule { }

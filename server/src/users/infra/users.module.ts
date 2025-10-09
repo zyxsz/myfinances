@@ -9,14 +9,15 @@ import { AuthModule } from '@/auth/infra/auth.module';
 import { SignIn } from '../app/use-cases/sign-in.use-case';
 import { GetUser } from '../app/use-cases/get-user.use-case';
 import { UpdateUser } from '../app/use-cases/update-user.use-case';
-import { UsersMongoDBRepository } from './database/mongodb/users.mongodb.repository';
 import { MongooseModule } from '@/shared/infra/database/mongoose/mongoose.module';
+import { UsersPrismaRepository } from './database/prisma/users.prisma.repository';
+import { PrismaModule } from '@/shared/infra/database/prisma/prisma.module';
 
 @Module({
-  imports: [MongooseModule, AuthModule],
+  imports: [PrismaModule, MongooseModule, AuthModule],
   controllers: [UsersController],
   providers: [
-    { provide: UsersRepository, useClass: UsersMongoDBRepository },
+    { provide: UsersRepository, useClass: UsersPrismaRepository },
     { provide: HashProvider, useClass: BcryptJsHashProvider },
     {
       provide: CreateUser.UseCase,
@@ -48,4 +49,4 @@ import { MongooseModule } from '@/shared/infra/database/mongoose/mongoose.module
     },
   ],
 })
-export class UsersModule {}
+export class UsersModule { }

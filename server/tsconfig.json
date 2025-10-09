@@ -24,8 +24,11 @@
     "paths": {
       "@/*": [
         "./src/*"
+      ],
+      "@prisma/*": [
+        "./generated/*"
       ]
     },
-    "noFallthroughCasesInSwitch": false
-  }
+    "noFallthroughCasesInSwitch": false,
+  },
 }
