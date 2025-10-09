@@ -1,20 +1,19 @@
 import { AuthModule } from '@/auth/infra/auth.module';
 import { Module } from '@nestjs/common';
 import { ProfilesRepository } from '../domain/repositories/profiles.repository';
-import { ProfilesInMemoryRepository } from './database/in-memory/profiles.in-memory.repository';
 import { GetManyProfiles } from '../app/use-cases/get-many-profiles.use-case';
 import { ProfilesController } from './profiles.controller';
 import { CreateProfile } from '../app/use-cases/create-profile.use-case';
 import { GetProfile } from '../app/use-cases/get-profile.use-case';
 import { UpdateProfile } from '../app/use-cases/update-profile.use-case';
 import { DeleteProfile } from '../app/use-cases/delete-profile.use-case';
-import { ProfilesMongoDBRepository } from './database/mongodb/profiles.mongodb.repository';
-import { MongooseModule } from '@/shared/infra/database/mongoose/mongoose.module';
+import { ProfilesPrismaRepository } from './database/prisma/profiles.prisma.repository';
+import { PrismaModule } from '@/shared/infra/database/prisma/prisma.module';
 
 @Module({
-  imports: [MongooseModule, AuthModule],
+  imports: [PrismaModule, AuthModule],
   providers: [
-    { provide: ProfilesRepository, useClass: ProfilesMongoDBRepository },
+    { provide: ProfilesRepository, useClass: ProfilesPrismaRepository },
     {
       provide: GetManyProfiles.UseCase,
       useFactory: (repository: ProfilesRepository) => {
@@ -53,4 +52,4 @@ import { MongooseModule } from '@/shared/infra/database/mongoose/mongoose.module
   ],
   controllers: [ProfilesController],
 })
-export class ProfilesModule {}
+export class ProfilesModule { }

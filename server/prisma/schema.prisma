@@ -27,4 +27,26 @@ model User {
 
   updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())
+
+  profiles Profile[]
+}
+
+enum ProfileType {
+  PF
+  PJ
+}
+
+model Profile {
+  id     String @id @map("_id")
+  userId String
+
+  name     String
+  document String?
+
+  type ProfileType
+
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
 }
