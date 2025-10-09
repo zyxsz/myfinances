@@ -125,4 +125,32 @@ describe('Releases in-memory repository unit tests', () => {
 
     expect(response.length).toEqual(4);
   });
+
+  it('should be able to find many releases with pagination', async () => {
+    const entity1 = Release.Entity.create(
+      ReleaseDataBuilder.build({
+        profileId: globalProfileId,
+      }),
+    );
+    const entity2 = Release.Entity.create(
+      ReleaseDataBuilder.build({
+        profileId: globalProfileId,
+      }),
+    );
+    const entity3 = Release.Entity.create(
+      ReleaseDataBuilder.build({
+        profileId: globalProfileId,
+      }),
+    );
+    sut.items = [entity1, entity2, entity3];
+
+    const response = await sut.findManyByProfileIdWithPagination(
+      globalProfileId,
+      { page: 1, limitPerPage: 2 },
+    );
+
+    expect(response.data.length).toEqual(2);
+    expect(response.pagination.currentPage).toEqual(1);
+  });
+
 });
