@@ -12,6 +12,8 @@ import { PeriodDto } from "./dtos/period.dto";
 import { CreateReleaseDto } from "./dtos/create-release.dto";
 import { GetReleasesWithPaginationDto } from "./dtos/get-releases-with-pagination.dto";
 import { UpdateReleaseDto } from "./dtos/update-release.dto";
+import { GetReleasesValue } from "../app/use-cases/get-releases-value.use-case";
+import { GetReleasesTotalDto } from "./dtos/get-releases-total.dto";
 
 
 @Controller('/profiles/:profileId/releases')
@@ -30,7 +32,10 @@ export class ReleasesController {
   @Inject()
   private updateReleaseUseCase: UpdateRelease.UseCase
   @Inject()
+  private getReleasesTotalUseCase: GetReleasesValue.UseCase
+  @Inject()
   private getProfileUseCase: GetProfile.UseCase
+
 
 
   @Get('/recents')
@@ -42,6 +47,15 @@ export class ReleasesController {
     return releases
   }
 
+  @Get('/total')
+  @HttpCode(200)
+  async getReleasesTotal(@Query() query: GetReleasesTotalDto, @Param('profileId') profileId: string, @AuthenticatedUser() userId: string) {
+    const profile = await this.getProfileUseCase.execute({ profileId, userId })
+    const response = await this.getReleasesTotalUseCase.execute({ profileId: profile.id, type: query.type, period: query.period })
+
+    return response
+  }
+
   @Get('/:releaseId')
   @HttpCode(200)
   async getRelease(@Param('profileId') profileId: string, @Param('releaseId') releaseId: string, @AuthenticatedUser() userId: string) {
@@ -51,6 +65,7 @@ export class ReleasesController {
 
     return release
   }
+
 
   @Get('/')
   @HttpCode(200)

@@ -14,6 +14,7 @@ import { ProfilesPrismaRepository } from "@/profiles/infra/database/prisma/profi
 import { GetProfile } from "@/profiles/app/use-cases/get-profile.use-case";
 import { ReleasesController } from "./releases.controller";
 import { AuthModule } from "@/auth/infra/auth.module";
+import { GetReleasesValue } from "../app/use-cases/get-releases-value.use-case";
 
 @Module({
   imports: [AuthModule, PrismaModule],
@@ -66,6 +67,13 @@ import { AuthModule } from "@/auth/infra/auth.module";
     provide: UpdateRelease.UseCase,
     useFactory: (repository: ReleasesRepository) => {
       return new UpdateRelease.UseCase(repository);
+    },
+    inject: [ReleasesRepository],
+  },
+  {
+    provide: GetReleasesValue.UseCase,
+    useFactory: (repository: ReleasesRepository) => {
+      return new GetReleasesValue.UseCase(repository);
     },
     inject: [ReleasesRepository],
   },
