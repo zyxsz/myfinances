@@ -11,6 +11,14 @@ import type { Pagination } from "@/shared/domain/pagination/pagination";
 export class ReleasesPrismaRepository implements ReleasesRepository {
   constructor(private prismaService: PrismaService) { }
 
+  async findManyByProfileIdAndPeriodAndType(profileId: string, periodInDays: number, type: Release.Type): Promise<Release.Entity[]> {
+    const releases = await this.prismaService.release.findMany({
+      where: { profileId, type, createdAt: { gte: addDays(new Date(), periodInDays * -1) } },
+    })
+
+    return releases.map(release => ReleasesPrismaMapper.toEntity(release))
+  }
+
   async findById(id: string): Promise<Release.Entity> {
     const release = await this.prismaService.release.findUnique({ where: { id } })
 

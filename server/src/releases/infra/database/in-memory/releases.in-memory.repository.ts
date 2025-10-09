@@ -9,6 +9,14 @@ export class ReleasesInMemoryRepository
   extends InMemoryRepository<Release.Entity, Release.Props>
   implements ReleasesRepository {
 
+  async findManyByProfileIdAndPeriodAndType(profileId: string, periodInDays: number, type: Release.Type): Promise<Release.Entity[]> {
+    const periodDate = addDays(new Date(), periodInDays * -1)
+
+    const items = this.items.filter(item => item.profileId === profileId && (item.createdAt.getTime() >= periodDate.getTime()))
+
+    return items
+  }
+
   async findByIdAndProfileId(id: string, profileId: string): Promise<Release.Entity> {
     const item = this.items.find(item => item.id === id && item.profileId === profileId)
 

@@ -29,6 +29,6 @@
         "./generated/*"
       ]
     },
-    "noFallthroughCasesInSwitch": false,
-  },
+    "noFallthroughCasesInSwitch": false
+  }
 }

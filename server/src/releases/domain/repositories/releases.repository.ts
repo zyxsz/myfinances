@@ -18,4 +18,6 @@ export abstract class ReleasesRepository extends Repository<
     profileId: string,
     pagination: Pagination.Input,
   ): Promise<Pagination.Output<Release.Entity>>;
+
+  abstract findManyByProfileIdAndPeriodAndType(profileId: string, periodInDays: number, type: Release.Type): Promise<Release.Entity[]>
 }
