@@ -9,9 +9,10 @@ import {
 export namespace GetRelease {
   export interface Input {
     releaseId: string;
+    profileId: string
   }
 
-  export interface Output extends ReleaseOutput {}
+  export interface Output extends ReleaseOutput { }
 
   export class UseCase extends BaseUseCase<Input, Output> {
     constructor(private releasesRepository: ReleasesRepository) {
@@ -19,7 +20,7 @@ export namespace GetRelease {
     }
 
     async execute(input: Input): Promise<Output> {
-      const release = await this.releasesRepository.findById(input.releaseId);
+      const release = await this.releasesRepository.findByIdAndProfileId(input.releaseId, input.profileId);
 
       return ReleaseOutputMapper.toOutput(release);
     }

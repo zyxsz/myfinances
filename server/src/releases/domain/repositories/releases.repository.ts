@@ -6,6 +6,8 @@ export abstract class ReleasesRepository extends Repository<
   Release.Entity,
   Release.Props
 > {
+  abstract findByIdAndProfileId(id: string, profileId: string): Promise<Release.Entity>
+
   abstract findRecentByProfileIdWithPeriod(
     profileId: string,
     limit: number,

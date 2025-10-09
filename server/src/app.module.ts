@@ -6,9 +6,10 @@ import { ConfigModule } from './shared/infra/config/config.module';
 import { ProfilesModule } from './profiles/infra/profiles.module';
 import { MongooseModule } from './shared/infra/database/mongoose/mongoose.module';
 import { PrismaModule } from './shared/infra/database/prisma/prisma.module';
+import { ReleasesModule } from './releases/infra/releases.module';
 
 @Module({
-  imports: [ConfigModule, PrismaModule, MongooseModule, UsersModule, ProfilesModule],
+  imports: [ConfigModule, PrismaModule, MongooseModule, UsersModule, ProfilesModule, ReleasesModule],
   controllers: [],
   providers: [
     {

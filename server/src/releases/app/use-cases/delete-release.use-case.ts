@@ -4,6 +4,7 @@ import { BaseUseCase } from '@/shared/app/use-cases/base.use-case';
 export namespace DeleteRelease {
   export interface Input {
     releaseId: string;
+    profileId: string;
   }
 
   export type Output = void;
@@ -14,7 +15,7 @@ export namespace DeleteRelease {
     }
 
     async execute(input: Input): Promise<Output> {
-      const release = await this.releasesRepository.findById(input.releaseId);
+      const release = await this.releasesRepository.findByIdAndProfileId(input.releaseId, input.profileId);
 
       await this.releasesRepository.delete(release);
 
