@@ -15,7 +15,7 @@ export namespace ProfilesService {
   };
 
   export const getManyProfiles = async (): Promise<GetManyProfilesResponse> => {
-    return Api.request("profiles", "GET").then((response) => response.json());
+    return Api.request("profiles", "GET", { cache: 'no-store' }).then((response) => response.json());
   };
 
   export const createProfile = async (

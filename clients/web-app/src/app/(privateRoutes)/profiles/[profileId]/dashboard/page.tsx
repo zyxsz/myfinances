@@ -24,7 +24,7 @@ export default async function Page({
     <div className="w-full max-w-screen-xl mx-auto p-8 space-y-4">
       <header className="flex items-center gap-4 justify-between">
         <div className="flex items-center gap-2">
-          <Text variant="header3">Meu din 01</Text>
+          <Text variant="header3">{profile.name}</Text>
           <span className="text-xxs bg-white/10 px-2 py-0.5 rounded-full text-white select-none">
             {profile.type}
           </span>

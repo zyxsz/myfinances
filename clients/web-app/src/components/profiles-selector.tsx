@@ -1,32 +1,41 @@
-import { ArrowRightIcon, CheckIcon, ChevronDownIcon } from "lucide-react";
+"use client";
+
+import {
+  ArrowRightIcon,
+  CheckIcon,
+  ChevronDownIcon,
+  PlusCircleIcon,
+} from "lucide-react";
 import { Button } from "./button";
 import {
   Dropdown,
   DropdownButton,
   DropdownItems,
+  DropdownSeparator,
   DropdownTrigger,
 } from "./dropdown";
 import { ProfilesService } from "@/api/services/profiles.service";
 import Link from "next/link";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { useParams } from "next/navigation";
 
-interface Props {
-  currentProfileId?: string;
-}
+export const ProfilesSelector = () => {
+  const { profileId } = useParams();
 
-export const ProfilesSelector = async ({ currentProfileId }: Props) => {
-  const profiles = await ProfilesService.getManyProfiles();
-
-  console.log(currentProfileId);
+  const { data: profiles } = useSuspenseQuery({
+    queryKey: ["profiles"],
+    queryFn: () => ProfilesService.getManyProfiles(),
+  });
 
   if (profiles.length <= 0)
     return (
       <Button asChild>
-        <Link href="/profiles">Meus perfis</Link>
+        <Link href="/profiles">Criar perfil</Link>
       </Button>
     );
 
-  const currentProfile = currentProfileId
-    ? profiles.find((profile) => profile.id === currentProfileId)
+  const currentProfile = profileId
+    ? profiles.find((profile) => profile.id === profileId)
     : null;
 
   return (
@@ -37,8 +46,8 @@ export const ProfilesSelector = async ({ currentProfileId }: Props) => {
             {currentProfile.name} <ChevronDownIcon />
           </Button>
         ) : (
-          <Button asChild>
-            <Link href="/profiles">Meus perfis</Link>
+          <Button>
+            Selecione um perfil <ChevronDownIcon />
           </Button>
         )}
       </DropdownTrigger>
@@ -48,10 +57,23 @@ export const ProfilesSelector = async ({ currentProfileId }: Props) => {
           <DropdownButton key={profile.id} asChild>
             <Link href={`/profiles/${profile.id}`}>
               {profile.name}
-              {profile.id === currentProfileId && <CheckIcon />}
+              {profile.id === profileId && <CheckIcon />}
             </Link>
           </DropdownButton>
         ))}
+        <DropdownSeparator />
+        <DropdownButton asChild>
+          <Link href={`/profiles/create`}>
+            Criar perfil
+            <PlusCircleIcon />
+          </Link>
+        </DropdownButton>
+        <DropdownButton asChild>
+          <Link href={`/profiles`}>
+            Outros perfis
+            <ArrowRightIcon />
+          </Link>
+        </DropdownButton>
       </DropdownItems>
     </Dropdown>
   );

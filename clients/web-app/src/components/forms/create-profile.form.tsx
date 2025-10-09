@@ -9,6 +9,7 @@ import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTransition } from "react";
 import { ProfilesService } from "@/api/services/profiles.service";
+import { getQueryClient } from "@/app/(privateRoutes)/providers";
 
 const schema = z.object({
   name: z.string().min(2).max(64),
@@ -36,6 +37,13 @@ export const CreateProfileForm = () => {
         name: data.name,
         type: data.type,
       });
+
+      await getQueryClient().invalidateQueries({
+        queryKey: ["profiles"],
+        exact: true,
+      });
+
+      router.push("/profiles");
     });
   };
 

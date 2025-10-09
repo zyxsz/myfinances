@@ -31,6 +31,8 @@ export namespace Api {
     options?: {
       body?: B;
       headers?: HeadersInit;
+      next?: NextFetchRequestConfig;
+      cache?: RequestCache;
     }
   ) => {
     try {
@@ -46,8 +48,10 @@ export namespace Api {
               ...options?.headers,
             }
           : { Authorization: `Bearer ${accessToken}`, ...options?.headers },
+        cache: options?.cache,
         next: {
-          revalidate: 60 * 2, // 2 minutes
+          revalidate: 15, // 15 seconds
+          ...options?.next,
         },
       });
 

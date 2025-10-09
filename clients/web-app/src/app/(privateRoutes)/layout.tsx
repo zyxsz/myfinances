@@ -7,6 +7,7 @@ import {
 import { UserStoreProvider } from "@/stores/user.store.provider";
 import { redirect } from "next/navigation";
 import { Suspense, type ReactNode } from "react";
+import { Providers } from "./providers";
 
 export default async function Layout({
   children,
@@ -23,16 +24,18 @@ export default async function Layout({
   }
 
   return (
-    <UserStoreProvider defaultState={{ user }}>
-      <Navbar
-        user={user}
-        profilesSelector={
-          <Suspense fallback={<ProfilesSelectorSkeleton />}>
-            <ProfilesSelector currentProfileId={profileId} />
-          </Suspense>
-        }
-      />
-      <div className="pt-18">{children}</div>
-    </UserStoreProvider>
+    <Providers>
+      <UserStoreProvider defaultState={{ user }}>
+        <Navbar
+          user={user}
+          profilesSelector={
+            <Suspense fallback={<ProfilesSelectorSkeleton />}>
+              <ProfilesSelector />
+            </Suspense>
+          }
+        />
+        <div className="pt-18">{children}</div>
+      </UserStoreProvider>
+    </Providers>
   );
 }

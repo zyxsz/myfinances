@@ -4,7 +4,9 @@ import type { UsersServiceInterfaces } from "../interfaces/http/users-service.in
 export namespace UsersService {
   export const getAuthenticatedUser =
     async (): Promise<UsersServiceInterfaces.GetAuthenticatedUserResponse> => {
-      return Api.request("users/me", "GET").then((response) => response.json());
+      return Api.request("users/me", "GET", { cache: "no-store" }).then(
+        (response) => response.json()
+      );
     };
 
   export const signIn = async (

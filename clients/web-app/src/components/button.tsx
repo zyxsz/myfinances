@@ -9,6 +9,8 @@ export const buttonVariants = cva(
       variant: {
         default:
           "border border-border text-app-primary-foreground-muted bg-app-primary hover:bg-app-secondary hover:border-white/25 [&[aria-expanded=true]]:bg-app-secondary [&[aria-expanded=true]]:border-white/25",
+        secondary:
+          "border border-border text-app-primary-foreground-muted bg-app-secondary hover:border-white/25 [&[aria-expanded=true]]:bg-app-secondary [&[aria-expanded=true]]:border-white/25",
         link: "text-app-primary-foreground-muted hover:underline hover:text-app-primary-foreground",
       },
       size: {
