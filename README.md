@@ -55,9 +55,10 @@ Objetivo: Um aplicativo para gerenciamento de finanças de maneira intuitiva e c
   - [x] Deverá ser possível a criação de novos lançamentos diretamente associados a um perfil.
   - [x] Deverá ser possível a busca de dados de um lançamento especifico.
   - [x] Deverá ser possível a busca por lançamentos recentes associados a um perfil (limite de 15 items & filtro por período).
-  - [ ] Deverá ser possível a busca por múltiplos lançamentos associados a um perfil com paginação (movimentações).
+  - [x] Deverá ser possível a busca por múltiplos lançamentos associados a um perfil com paginação (movimentações).
   - [x] Deverá ser possível atualizar um lançamento especifico.
   - [x] Deverá ser possível excluir um lançamento especifico.
+  - [ ] Deverá ser possível buscar o valor total de lançamentos por periodos (INCOME, OUTCOME, INVESTMENT).
 
 - [ ] **Grupamentos**
 

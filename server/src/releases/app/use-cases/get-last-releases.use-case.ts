@@ -4,13 +4,11 @@ import {
   ReleaseOutputMapper,
   type ReleaseOutput,
 } from '../dtos/release-output.dto';
-import type { ReleasePeriod } from '../dtos/release-period';
+import type { ReleasePeriodRange } from '../dtos/release-period';
 
-export namespace GetRecentRelease {
-  export interface Input {
+export namespace GetLastReleases {
+  export interface Input extends ReleasePeriodRange {
     profileId: string;
-
-    period: ReleasePeriod;
   }
 
   export interface Output extends Array<ReleaseOutput> { }
@@ -22,10 +20,10 @@ export namespace GetRecentRelease {
 
     async execute(input: Input): Promise<Output> {
       const releases =
-        await this.releasesRepository.findRecentByProfileIdWithPeriod(
+        await this.releasesRepository.findLastByProfileIdAndRange(
           input.profileId,
           15,
-          input.period,
+          input.range.startAt, input.range.endAt
         );
 
       return releases.map((release) => ReleaseOutputMapper.toOutput(release));

@@ -14,10 +14,17 @@ export abstract class ReleasesRepository extends Repository<
     periodInDays?: number,
   ): Promise<Release.Entity[]>;
 
+  abstract findLastByProfileIdAndRange(
+    profileId: string,
+    limit: number,
+    rangeStart: Date,
+    rangeEnd: Date
+  ): Promise<Release.Entity[]>;
+
   abstract findManyByProfileIdWithPagination(
     profileId: string,
     pagination: Pagination.Input,
   ): Promise<Pagination.Output<Release.Entity>>;
 
-  abstract findManyByProfileIdAndPeriodAndType(profileId: string, periodInDays: number, type: Release.Type): Promise<Release.Entity[]>
+  abstract findManyByProfileIdAndRangeAndType(profileId: string, rangeStart: Date, rangeEnd: Date, type: Release.Type): Promise<Release.Entity[]>
 }

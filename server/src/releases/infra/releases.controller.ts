@@ -14,6 +14,8 @@ import { GetReleasesWithPaginationDto } from "./dtos/get-releases-with-paginatio
 import { UpdateReleaseDto } from "./dtos/update-release.dto";
 import { GetReleasesValue } from "../app/use-cases/get-releases-value.use-case";
 import { GetReleasesTotalDto } from "./dtos/get-releases-total.dto";
+import { GetLastReleasesDto } from "./dtos/get-last-releases.dto";
+import { GetLastReleases } from "../app/use-cases/get-last-releases.use-case";
 
 
 @Controller('/profiles/:profileId/releases')
@@ -34,9 +36,22 @@ export class ReleasesController {
   @Inject()
   private getReleasesTotalUseCase: GetReleasesValue.UseCase
   @Inject()
+  private getLastReleasesUseCase: GetLastReleases.UseCase
+  @Inject()
   private getProfileUseCase: GetProfile.UseCase
 
 
+
+
+
+  @Get('/last')
+  @HttpCode(200)
+  async getLastReleases(@Query() query: GetLastReleasesDto, @Param('profileId') profileId: string, @AuthenticatedUser() userId: string) {
+    const profile = await this.getProfileUseCase.execute({ profileId, userId })
+    const releases = await this.getLastReleasesUseCase.execute({ profileId: profile.id, range: { startAt: query.rangeStartAt, endAt: query.rangeEndAt } })
+
+    return releases
+  }
 
   @Get('/recents')
   @HttpCode(200)
@@ -51,7 +66,12 @@ export class ReleasesController {
   @HttpCode(200)
   async getReleasesTotal(@Query() query: GetReleasesTotalDto, @Param('profileId') profileId: string, @AuthenticatedUser() userId: string) {
     const profile = await this.getProfileUseCase.execute({ profileId, userId })
-    const response = await this.getReleasesTotalUseCase.execute({ profileId: profile.id, type: query.type, period: query.period })
+    const response = await this.getReleasesTotalUseCase.execute({
+      profileId: profile.id, type: query.type, range: {
+        startAt: query.rangeStartAt,
+        endAt: query.rangeEndAt
+      }
+    })
 
     return response
   }

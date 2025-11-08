@@ -9,14 +9,7 @@ import { redirect } from "next/navigation";
 import { Suspense, type ReactNode } from "react";
 import { Providers } from "./providers";
 
-export default async function Layout({
-  children,
-  params,
-}: {
-  children: ReactNode;
-  params: Promise<{ profileId?: string }>;
-}) {
-  const { profileId } = await params;
+export default async function Layout({ children }: { children: ReactNode }) {
   const user = await UsersService.getAuthenticatedUser().catch(() => null);
 
   if (user === null) {

@@ -3,7 +3,7 @@ import { RequestError } from "./errors/request.error";
 export namespace Api {
   export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-  export type RequestMethod = "GET" | "POST" | "PATCH";
+  export type RequestMethod = "GET" | "POST" | "PATCH" | 'DELETE';
 
   export const getCookies = async () => {
     const { cookies } = await import("next/headers");
@@ -35,24 +35,22 @@ export namespace Api {
       cache?: RequestCache;
     }
   ) => {
+    const accessToken = await getAccessToken();
+
     try {
-      const accessToken = await getAccessToken();
 
       const response = await fetch(`${BASE_URL}/${path}`, {
         method,
         body: options?.body,
         headers: options?.body
           ? {
-              Authorization: `Bearer ${accessToken}`,
-              "Content-Type": "application/json",
-              ...options?.headers,
-            }
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
+            ...options?.headers,
+          }
           : { Authorization: `Bearer ${accessToken}`, ...options?.headers },
-        cache: options?.cache,
-        next: {
-          revalidate: 15, // 15 seconds
-          ...options?.next,
-        },
+        cache: options?.cache || 'no-store',
+        next: options?.next,
       });
 
       if (!response.ok) {
